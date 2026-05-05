@@ -1,6 +1,11 @@
 package org.keycloak.storage.tbluser;
 
-import org.jboss.logging.Logger;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.sql.DataSource;
+
 import org.keycloak.component.ComponentModel;
 import org.keycloak.credential.CredentialInput;
 import org.keycloak.credential.CredentialInputValidator;
@@ -10,11 +15,7 @@ import org.keycloak.models.UserModel;
 import org.keycloak.storage.UserStorageProvider;
 import org.keycloak.storage.user.UserLookupProvider;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import org.jboss.logging.Logger;
 
 public class TblUserStorageProvider implements UserStorageProvider, UserLookupProvider, CredentialInputValidator {
 

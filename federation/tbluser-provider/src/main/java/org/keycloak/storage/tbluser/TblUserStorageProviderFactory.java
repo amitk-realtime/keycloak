@@ -1,6 +1,9 @@
 package org.keycloak.storage.tbluser;
 
-import org.jboss.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
+import javax.sql.DataSource;
+
 import org.keycloak.Config;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.component.ComponentValidationException;
@@ -10,9 +13,7 @@ import org.keycloak.models.RealmModel;
 import org.keycloak.provider.ProviderConfigProperty;
 import org.keycloak.storage.UserStorageProviderFactory;
 
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
+import org.jboss.logging.Logger;
 
 public class TblUserStorageProviderFactory implements UserStorageProviderFactory<TblUserStorageProvider> {
 

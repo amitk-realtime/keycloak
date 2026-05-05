@@ -3,12 +3,7 @@ package org.keycloak.storage.tbluser;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
-import org.keycloak.models.UserModel;
 import org.keycloak.storage.adapter.AbstractUserAdapterFederatedStorage;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 public class TblUserAdapter extends AbstractUserAdapterFederatedStorage {
 
@@ -37,7 +32,7 @@ public class TblUserAdapter extends AbstractUserAdapterFederatedStorage {
 
     @Override
     public String getId() {
-        return String.valueOf(userId);
+        return storageProviderModel.getId() + ":" + userId;
     }
 
     @Override
@@ -47,7 +42,7 @@ public class TblUserAdapter extends AbstractUserAdapterFederatedStorage {
 
     @Override
     public void setUsername(String username) {
-        // Read-only from tblUser
+        throw new org.keycloak.storage.ReadOnlyException("user is read only for this update");
     }
 
     @Override
@@ -57,7 +52,7 @@ public class TblUserAdapter extends AbstractUserAdapterFederatedStorage {
 
     @Override
     public void setFirstName(String firstName) {
-        // Read-only from tblUser
+        throw new org.keycloak.storage.ReadOnlyException("user is read only for this update");
     }
 
     @Override
@@ -67,7 +62,7 @@ public class TblUserAdapter extends AbstractUserAdapterFederatedStorage {
 
     @Override
     public void setLastName(String lastName) {
-        // Read-only from tblUser
+        throw new org.keycloak.storage.ReadOnlyException("user is read only for this update");
     }
 
     @Override
@@ -77,7 +72,7 @@ public class TblUserAdapter extends AbstractUserAdapterFederatedStorage {
 
     @Override
     public void setEmail(String email) {
-        // Read-only from tblUser
+        throw new org.keycloak.storage.ReadOnlyException("user is read only for this update");
     }
 
     @Override
@@ -87,7 +82,7 @@ public class TblUserAdapter extends AbstractUserAdapterFederatedStorage {
 
     @Override
     public void setEmailVerified(boolean verified) {
-        // Read-only from tblUser
+        throw new org.keycloak.storage.ReadOnlyException("user is read only for this update");
     }
 
     @Override
@@ -97,59 +92,16 @@ public class TblUserAdapter extends AbstractUserAdapterFederatedStorage {
 
     @Override
     public void setEnabled(boolean enabled) {
-        // Read-only from tblUser
+        throw new org.keycloak.storage.ReadOnlyException("user is read only for this update");
     }
 
     @Override
-    public long getCreatedTimestamp() {
-        return 0;
+    public Long getCreatedTimestamp() {
+        return System.currentTimeMillis();
     }
 
     @Override
-    public void setCreatedTimestamp(long timestamp) {
-        // Read-only from tblUser
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return !locked;
-    }
-
-    @Override
-    public void setAccountNonLocked(boolean nonLocked) {
-        // Read-only from tblUser
-    }
-
-    @Override
-    public Map<String, List<String>> getAttributes() {
-        Map<String, List<String>> attrs = super.getAttributes();
-        attrs.put("fullName", Collections.singletonList(fullName != null ? fullName : ""));
-        return attrs;
-    }
-
-    @Override
-    public void setAttribute(String name, List<String> values) {
-        // Read-only from tblUser
-    }
-
-    @Override
-    public void removeAttribute(String name) {
-        // Read-only from tblUser
-    }
-
-    @Override
-    public String getFirstAttribute(String name) {
-        if ("fullName".equals(name)) {
-            return fullName;
-        }
-        return super.getFirstAttribute(name);
-    }
-
-    @Override
-    public List<String> getAttribute(String name) {
-        if ("fullName".equals(name)) {
-            return Collections.singletonList(fullName != null ? fullName : "");
-        }
-        return super.getAttribute(name);
+    public void setCreatedTimestamp(Long timestamp) {
+        throw new org.keycloak.storage.ReadOnlyException("user is read only for this update");
     }
 }

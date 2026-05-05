@@ -37,6 +37,7 @@
         <module>ldap</module>
         <module>sssd</module>
         <module>ipatuura</module>
+        <module>tbluser-provider</module>
     </modules>
 
 </project>

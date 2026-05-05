@@ -82,7 +82,8 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <createTable tableName="USER_FEDERATION_MAPPER">
+        <!-- SKIPPED: USER_FEDERATION_MAPPER table - using custom UserStorageProvider (tblUser) instead -->
+        <!-- <createTable tableName="USER_FEDERATION_MAPPER">
             <column name="ID" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
@@ -98,8 +99,9 @@
             <column name="REALM_ID" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-        </createTable>
-        <createTable tableName="USER_FEDERATION_MAPPER_CONFIG">
+        </createTable> -->
+        <!-- SKIPPED: USER_FEDERATION_MAPPER_CONFIG table - using custom UserStorageProvider (tblUser) instead -->
+        <!-- <createTable tableName="USER_FEDERATION_MAPPER_CONFIG">
             <column name="USER_FEDERATION_MAPPER_ID" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
@@ -107,7 +109,7 @@
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-        </createTable>
+        </createTable> -->
 
         <addColumn tableName="REALM">
             <column name="ADMIN_EVENTS_ENABLED" type="BOOLEAN" defaultValueBoolean="false">
@@ -181,16 +183,21 @@
         <dropColumn tableName="USER_REQUIRED_ACTION" columnName="ACTION"/>
         <addPrimaryKey columnNames="REQUIRED_ACTION, USER_ID" constraintName="CONSTRAINT_REQUIRED_ACTION" tableName="USER_REQUIRED_ACTION"/>
         <addPrimaryKey columnNames="CLIENT_SESSION, AUTHENTICATOR" constraintName="CONSTRAINT_AUTH_STATUS_PK" tableName="CLIENT_SESSION_AUTH_STATUS"/>
-        <addPrimaryKey columnNames="ID" constraintName="CONSTRAINT_FEDMAPPERPM" tableName="USER_FEDERATION_MAPPER"/>
-        <addPrimaryKey columnNames="USER_FEDERATION_MAPPER_ID, NAME" constraintName="CONSTRAINT_FEDMAPPER_CFG_PM" tableName="USER_FEDERATION_MAPPER_CONFIG"/>
+        <!-- SKIPPED: PK for USER_FEDERATION_MAPPER -->
+        <!-- <addPrimaryKey columnNames="ID" constraintName="CONSTRAINT_FEDMAPPERPM" tableName="USER_FEDERATION_MAPPER"/> -->
+        <!-- SKIPPED: PK for USER_FEDERATION_MAPPER_CONFIG -->
+        <!-- <addPrimaryKey columnNames="USER_FEDERATION_MAPPER_ID, NAME" constraintName="CONSTRAINT_FEDMAPPER_CFG_PM" tableName="USER_FEDERATION_MAPPER_CONFIG"/> -->
         <addForeignKeyConstraint baseColumnNames="CLIENT_SESSION" baseTableName="CLIENT_SESSION_AUTH_STATUS" constraintName="AUTH_STATUS_CONSTRAINT" referencedColumnNames="ID" referencedTableName="CLIENT_SESSION"/>
         <addForeignKeyConstraint baseColumnNames="REALM_ID" baseTableName="AUTHENTICATOR" constraintName="FK_AUTH_REALM" referencedColumnNames="ID" referencedTableName="REALM"/>
         <addForeignKeyConstraint baseColumnNames="REALM_ID" baseTableName="AUTHENTICATION_FLOW" constraintName="FK_AUTH_FLOW_REALM" referencedColumnNames="ID" referencedTableName="REALM"/>
         <addForeignKeyConstraint baseColumnNames="REALM_ID" baseTableName="AUTHENTICATION_EXECUTION" constraintName="FK_AUTH_EXEC_REALM" referencedColumnNames="ID" referencedTableName="REALM"/>
         <addForeignKeyConstraint baseColumnNames="FLOW_ID" baseTableName="AUTHENTICATION_EXECUTION" constraintName="FK_AUTH_EXEC_FLOW" referencedColumnNames="ID" referencedTableName="AUTHENTICATION_FLOW"/>
-        <addForeignKeyConstraint baseColumnNames="REALM_ID" baseTableName="USER_FEDERATION_MAPPER" constraintName="FK_FEDMAPPERPM_REALM" referencedColumnNames="ID" referencedTableName="REALM"/>
-        <addForeignKeyConstraint baseColumnNames="FEDERATION_PROVIDER_ID" baseTableName="USER_FEDERATION_MAPPER" constraintName="FK_FEDMAPPERPM_FEDPRV" referencedColumnNames="ID" referencedTableName="USER_FEDERATION_PROVIDER"/>
-        <addForeignKeyConstraint baseColumnNames="USER_FEDERATION_MAPPER_ID" baseTableName="USER_FEDERATION_MAPPER_CONFIG" constraintName="FK_FEDMAPPER_CFG" referencedColumnNames="ID" referencedTableName="USER_FEDERATION_MAPPER"/>
+        <!-- SKIPPED: FK for USER_FEDERATION_MAPPER -->
+        <!-- <addForeignKeyConstraint baseColumnNames="REALM_ID" baseTableName="USER_FEDERATION_MAPPER" constraintName="FK_FEDMAPPERPM_REALM" referencedColumnNames="ID" referencedTableName="REALM"/> -->
+        <!-- SKIPPED: FK for USER_FEDERATION_MAPPER -->
+        <!-- <addForeignKeyConstraint baseColumnNames="FEDERATION_PROVIDER_ID" baseTableName="USER_FEDERATION_MAPPER" constraintName="FK_FEDMAPPERPM_FEDPRV" referencedColumnNames="ID" referencedTableName="USER_FEDERATION_PROVIDER"/> -->
+        <!-- SKIPPED: FK for USER_FEDERATION_MAPPER_CONFIG -->
+        <!-- <addForeignKeyConstraint baseColumnNames="USER_FEDERATION_MAPPER_ID" baseTableName="USER_FEDERATION_MAPPER_CONFIG" constraintName="FK_FEDMAPPER_CFG" referencedColumnNames="ID" referencedTableName="USER_FEDERATION_MAPPER"/> -->
 
         <dropDefaultValue tableName="REALM" columnName="PASSWORD_CRED_GRANT_ALLOWED" />
         <dropColumn tableName="REALM" columnName="PASSWORD_CRED_GRANT_ALLOWED"/>

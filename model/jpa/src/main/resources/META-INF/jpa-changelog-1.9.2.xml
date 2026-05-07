@@ -21,28 +21,28 @@
         <validCheckSum>7:b82ffb34850fa0836be16deefc6a87c4</validCheckSum>
 
         <!-- Optimized as lookup user by email is often operation -->
-        <createIndex indexName="IDX_USER_EMAIL" tableName="USER_ENTITY">
+<!--        <createIndex indexName="IDX_USER_EMAIL" tableName="USER_ENTITY">
             <column name="EMAIL" type="VARCHAR(255)"/>
-        </createIndex>
+        </createIndex>-->
 
         <!-- Indexes for foreign keys are available by default on some RDBMS (for example MySQL) but not on some others (for example PostgreSQL), so explicitly creating them here -->
-        <createIndex indexName="IDX_USER_ROLE_MAPPING" tableName="USER_ROLE_MAPPING">
+<!--        <createIndex indexName="IDX_USER_ROLE_MAPPING" tableName="USER_ROLE_MAPPING">
             <column name="USER_ID" type="VARCHAR(36)"/>
-        </createIndex>
+        </createIndex>-->
         <createIndex indexName="IDX_USER_GROUP_MAPPING" tableName="USER_GROUP_MEMBERSHIP">
             <column name="USER_ID" type="VARCHAR(36)"/>
         </createIndex>
-        <createIndex indexName="IDX_USER_CONSENT" tableName="USER_CONSENT">
+<!--        <createIndex indexName="IDX_USER_CONSENT" tableName="USER_CONSENT">
             <column name="USER_ID" type="VARCHAR(36)"/>
-        </createIndex>
-        <createIndex indexName="IDX_CONSENT_PROTMAPPER" tableName="USER_CONSENT_PROT_MAPPER">
+        </createIndex>-->
+<!--        <createIndex indexName="IDX_CONSENT_PROTMAPPER" tableName="USER_CONSENT_PROT_MAPPER">
             <column name="USER_CONSENT_ID" type="VARCHAR(36)"/>
-        </createIndex>
-        <createIndex indexName="IDX_CONSENT_ROLE" tableName="USER_CONSENT_ROLE">
+        </createIndex>-->
+<!--        <createIndex indexName="IDX_CONSENT_ROLE" tableName="USER_CONSENT_ROLE">
             <column name="USER_CONSENT_ID" type="VARCHAR(36)"/>
-        </createIndex>
+        </createIndex>-->
 
-        <createIndex indexName="IDX_USER_ATTRIBUTE" tableName="USER_ATTRIBUTE">
+<!--        <createIndex indexName="IDX_USER_ATTRIBUTE" tableName="USER_ATTRIBUTE">
             <column name="USER_ID" type="VARCHAR(36)"/>
         </createIndex>
         <createIndex indexName="IDX_USER_CREDENTIAL" tableName="CREDENTIAL">
@@ -50,7 +50,7 @@
         </createIndex>
         <createIndex indexName="IDX_USER_REQACTIONS" tableName="USER_REQUIRED_ACTION">
             <column name="USER_ID" type="VARCHAR(36)"/>
-        </createIndex>
+        </createIndex>-->
 
         <createIndex indexName="IDX_FEDIDENTITY_USER" tableName="FEDERATED_IDENTITY">
             <column name="USER_ID" type="VARCHAR(36)"/>

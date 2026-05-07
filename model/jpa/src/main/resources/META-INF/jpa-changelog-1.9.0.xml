@@ -38,7 +38,7 @@
             <column name="OTP_POLICY_DIGITS" type="INT" valueNumeric="6" />
             <where>OTP_POLICY_DIGITS is NULL</where>
         </update>
-        <update tableName="CREDENTIAL">
+<!--        <update tableName="CREDENTIAL">
             <column name="COUNTER" type="INT" valueNumeric="0" />
             <where>COUNTER is NULL</where>
         </update>
@@ -49,7 +49,7 @@
         <update tableName="CREDENTIAL">
             <column name="PERIOD" type="INT" valueNumeric="30" />
             <where>PERIOD is NULL</where>
-        </update>
+        </update>-->
         <!-- 1.6 -->
         <update tableName="REALM">
             <column name="OFFLINE_SESSION_IDLE_TIMEOUT" type="INT" valueNumeric="2592000" />
@@ -61,7 +61,7 @@
             <where>ACCESS_TOKEN_LIFE_IMPLICIT is NULL</where>
         </update>
 
-        <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate1_9_0_Final"/>
+        <!-- <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate1_9_0_Final"/> -->
 
         <dropForeignKeyConstraint baseTableName="REALM_CLIENT" constraintName="FK_93S3P0DIUXAWWQQSA528UBY2Q"/>
         <dropForeignKeyConstraint baseTableName="REALM_CLIENT" constraintName="FK_M6QGA3RFME47335JY8JXYXH3I"/>
@@ -72,7 +72,7 @@
         <dropTable tableName="REALM_CLIENT_TEMPLATE" />
 
         <dropForeignKeyConstraint baseTableName="FED_PROVIDERS" constraintName="FK_213LYQ09FKXQ8K8NY8DY3737T"/>
-        <dropForeignKeyConstraint baseTableName="FED_PROVIDERS" constraintName="FK_DCCIRJLIPU1478VQC89DID88C"/>
+<!--        <dropForeignKeyConstraint baseTableName="FED_PROVIDERS" constraintName="FK_DCCIRJLIPU1478VQC89DID88C"/>-->
         <dropUniqueConstraint tableName="FED_PROVIDERS" constraintName="UK_DCCIRJLIPU1478VQC89DID88C" />
         <dropTable tableName="FED_PROVIDERS" />
 

@@ -21,7 +21,7 @@
     <changeSet author="keycloak" id="8.0.0-adding-credential-columns">
         <validCheckSum>7:ec9707ae4d4f0b7452fee20128083879</validCheckSum>
 
-        <addColumn tableName="CREDENTIAL">
+<!--        <addColumn tableName="CREDENTIAL">
             <column name="USER_LABEL" type="VARCHAR(255)">
                 <constraints nullable="true"/>
             </column>
@@ -49,7 +49,7 @@
             <column name="PRIORITY" type="INT">
                 <constraints nullable="true"/>
             </column>
-        </addColumn>
+        </addColumn>-->
     </changeSet>
 
     <!--Update format of credential to fill secret_data and credential_data - used on all databases beside Oracle DB -->
@@ -68,7 +68,7 @@
 
         <!-- SALT was saved in tinyblob in previous version. -->
         <!-- Can't be automatically updated for all users to new format in single UPDATE statement, so existing users will be updated on-the-fly -->
-        <update tableName="CREDENTIAL">
+        <!--<update tableName="CREDENTIAL">
             <column name="PRIORITY" value="10" />
             <column name="SECRET_DATA" valueComputed="CONCAT('{&quot;value&quot;:&quot;', REPLACE(VALUE, '&quot;', '\\&quot;'), '&quot;,&quot;salt&quot;:&quot;__SALT__&quot;}')"/>
             <column name="CREDENTIAL_DATA" valueComputed="CONCAT('{&quot;hashIterations&quot;:', HASH_ITERATIONS, ',&quot;algorithm&quot;:&quot;', ALGORITHM, '&quot;}')"/>
@@ -91,7 +91,7 @@
             <where>TYPE = 'hotp'</where>
         </update>
 
-        <!--Update format of fed_user_credential to fill secret_data and credential_data-->
+        &lt;!&ndash;Update format of fed_user_credential to fill secret_data and credential_data&ndash;&gt;
         <update tableName="FED_USER_CREDENTIAL">
             <column name="PRIORITY" value="10" />
             <column name="SECRET_DATA" valueComputed="CONCAT('{&quot;value&quot;:&quot;', REPLACE(VALUE, '&quot;', '\\&quot;'), '&quot;,&quot;salt&quot;:&quot;__SALT__&quot;}')"/>
@@ -113,7 +113,7 @@
             <column name="SECRET_DATA" valueComputed="CONCAT('{&quot;value&quot;:&quot;', REPLACE(VALUE, '&quot;', '\\&quot;'), '&quot;}')"/>
             <column name="CREDENTIAL_DATA" valueComputed="CONCAT('{&quot;subType&quot;:&quot;hotp&quot;,&quot;digits&quot;:', DIGITS, ',&quot;counter&quot;:', COUNTER, ',&quot;algorithm&quot;:&quot;', ALGORITHM, '&quot;}')"/>
             <where>TYPE = 'hotp'</where>
-        </update>
+        </update>-->
 
     </changeSet>
 
@@ -131,7 +131,7 @@
 
         <!-- SALT was saved in tinyblob in previous version. -->
         <!-- Can't be automatically updated for all users to new format in single UPDATE statement, so existing users will be updated on-the-fly -->
-        <update tableName="CREDENTIAL">
+       <!-- <update tableName="CREDENTIAL">
             <column name="PRIORITY" value="10" />
             <column name="SECRET_DATA" valueComputed="'{&quot;value&quot;:&quot;' || REPLACE(VALUE, '&quot;', '\&quot;') || '&quot;,&quot;salt&quot;:&quot;__SALT__&quot;}'"/>
             <column name="CREDENTIAL_DATA" valueComputed="'{&quot;hashIterations&quot;:' || HASH_ITERATIONS || ',&quot;algorithm&quot;:&quot;' || ALGORITHM || '&quot;}'"/>
@@ -154,7 +154,7 @@
             <where>TYPE = 'hotp'</where>
         </update>
 
-        <!--Update format of fed_user_credential to fill secret_data and credential_data-->
+        &lt;!&ndash;Update format of fed_user_credential to fill secret_data and credential_data&ndash;&gt;
         <update tableName="FED_USER_CREDENTIAL">
             <column name="PRIORITY" value="10" />
             <column name="SECRET_DATA" valueComputed="'{&quot;value&quot;:&quot;' || REPLACE(VALUE, '&quot;', '\&quot;') || '&quot;,&quot;salt&quot;:&quot;__SALT__&quot;}'"/>
@@ -176,7 +176,7 @@
             <column name="SECRET_DATA" valueComputed="'{&quot;value&quot;:&quot;' || REPLACE(VALUE, '&quot;', '\&quot;') || '&quot;}'"/>
             <column name="CREDENTIAL_DATA" valueComputed="'{&quot;subType&quot;:&quot;hotp&quot;,&quot;digits&quot;:' || DIGITS || ',&quot;counter&quot;:' || COUNTER || ',&quot;algorithm&quot;:&quot;' || ALGORITHM || '&quot;}'"/>
             <where>TYPE = 'hotp'</where>
-        </update>
+        </update>-->
 
     </changeSet>
 
@@ -188,7 +188,7 @@
             </not>
         </preConditions>
 
-        <dropDefaultValue tableName="CREDENTIAL" columnName="COUNTER" />
+        <!--<dropDefaultValue tableName="CREDENTIAL" columnName="COUNTER" />
         <dropDefaultValue tableName="CREDENTIAL" columnName="DIGITS" />
         <dropDefaultValue tableName="CREDENTIAL" columnName="PERIOD" />
         <dropDefaultValue tableName="CREDENTIAL" columnName="ALGORITHM" />
@@ -201,7 +201,7 @@
         <dropColumn tableName="CREDENTIAL" columnName="PERIOD"/>
         <dropColumn tableName="CREDENTIAL" columnName="ALGORITHM"/>
 
-        <!--credential attributes are now held within the json of secret_data and credential_data (not this it was used in any case)-->
+        &lt;!&ndash;credential attributes are now held within the json of secret_data and credential_data (not this it was used in any case)&ndash;&gt;
         <dropTable tableName="CREDENTIAL_ATTRIBUTE"/>
 
         <dropDefaultValue tableName="FED_USER_CREDENTIAL" columnName="COUNTER" />
@@ -215,10 +215,10 @@
         <dropColumn tableName="FED_USER_CREDENTIAL" columnName="COUNTER"/>
         <dropColumn tableName="FED_USER_CREDENTIAL" columnName="DIGITS"/>
         <dropColumn tableName="FED_USER_CREDENTIAL" columnName="PERIOD"/>
-        <dropColumn tableName="FED_USER_CREDENTIAL" columnName="ALGORITHM"/>
+        <dropColumn tableName="FED_USER_CREDENTIAL" columnName="ALGORITHM"/>-->
 
         <!--credential attributes are now held within the json of secret_data and credential_data (not this it was used in any case)-->
-        <dropTable tableName="FED_CREDENTIAL_ATTRIBUTE"/>
+<!--        <dropTable tableName="FED_CREDENTIAL_ATTRIBUTE"/>-->
 
     </changeSet>
 

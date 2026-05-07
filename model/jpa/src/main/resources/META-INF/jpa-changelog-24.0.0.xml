@@ -18,7 +18,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="keycloak" id="24.0.0-9758">
-        <addColumn tableName="USER_ATTRIBUTE">
+<!--        <addColumn tableName="USER_ATTRIBUTE">
             <column name="LONG_VALUE_HASH" type="BINARY(64)" />
             <column name="LONG_VALUE_HASH_LOWER_CASE" type="BINARY(64)" />
             <column name="LONG_VALUE" type="NCLOB" />
@@ -27,27 +27,27 @@
             <column name="LONG_VALUE_HASH" type="BINARY(64)" />
             <column name="LONG_VALUE_HASH_LOWER_CASE" type="BINARY(64)" />
             <column name="LONG_VALUE" type="NCLOB" />
-        </addColumn>
-        <createIndex tableName="USER_ATTRIBUTE" indexName="USER_ATTR_LONG_VALUES">
+        </addColumn>-->
+<!--        <createIndex tableName="USER_ATTRIBUTE" indexName="USER_ATTR_LONG_VALUES">
             <column name="LONG_VALUE_HASH" />
             <column name="NAME" />
         </createIndex>
         <createIndex tableName="FED_USER_ATTRIBUTE" indexName="FED_USER_ATTR_LONG_VALUES">
             <column name="LONG_VALUE_HASH" />
             <column name="NAME" />
-        </createIndex>
-        <createIndex tableName="USER_ATTRIBUTE" indexName="USER_ATTR_LONG_VALUES_LOWER_CASE">
+        </createIndex>-->
+<!--        <createIndex tableName="USER_ATTRIBUTE" indexName="USER_ATTR_LONG_VALUES_LOWER_CASE">
             <column name="LONG_VALUE_HASH_LOWER_CASE" />
             <column name="NAME" />
         </createIndex>
         <createIndex tableName="FED_USER_ATTRIBUTE" indexName="FED_USER_ATTR_LONG_VALUES_LOWER_CASE">
             <column name="LONG_VALUE_HASH_LOWER_CASE" />
             <column name="NAME" />
-        </createIndex>
+        </createIndex>-->
     </changeSet>
 
     <changeSet author="keycloak" id="24.0.0-9758-2">
-        <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.FederatedUserAttributeTextColumnMigration" />
+        <!-- <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.FederatedUserAttributeTextColumnMigration"/> -->
     </changeSet>
 
     <changeSet author="keycloak" id="24.0.0-26618-drop-index-if-present">

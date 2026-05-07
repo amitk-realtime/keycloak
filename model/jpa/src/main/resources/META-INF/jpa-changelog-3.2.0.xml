@@ -61,7 +61,7 @@
             </not>
         </preConditions>
         
-        <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.RemoveDuplicateOfflineSessions" />
+        <!-- <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.RemoveDuplicateOfflineSessions" /> -->
     </changeSet>
 
     <changeSet author="keycloak" id="3.2.0-fixed">
@@ -139,12 +139,12 @@
         <createIndex indexName="IDX_COMPOSITE_CHILD" tableName="COMPOSITE_ROLE">
             <column name="CHILD_ROLE" type="VARCHAR(36)"/>
         </createIndex>
-        <createIndex indexName="IDX_CREDENTIAL_ATTR_CRED" tableName="CREDENTIAL_ATTRIBUTE">
+<!--        <createIndex indexName="IDX_CREDENTIAL_ATTR_CRED" tableName="CREDENTIAL_ATTRIBUTE">
             <column name="CREDENTIAL_ID" type="VARCHAR(36)"/>
-        </createIndex>
-        <createIndex indexName="IDX_FED_CRED_ATTR_CRED" tableName="FED_CREDENTIAL_ATTRIBUTE">
+        </createIndex>-->
+<!--        <createIndex indexName="IDX_FED_CRED_ATTR_CRED" tableName="FED_CREDENTIAL_ATTRIBUTE">
             <column name="CREDENTIAL_ID" type="VARCHAR(36)"/>
-        </createIndex>
+        </createIndex>-->
         <createIndex indexName="IDX_GROUP_ATTR_GROUP" tableName="GROUP_ATTRIBUTE">
             <column name="GROUP_ID" type="VARCHAR(36)"/>
         </createIndex>
@@ -220,15 +220,15 @@
         <createIndex indexName="IDX_TEMPL_SCOPE_MAPP_ROLE" tableName="TEMPLATE_SCOPE_MAPPING">
             <column name="ROLE_ID" type="VARCHAR(36)"/>
         </createIndex>
-        <createIndex indexName="IDX_USR_FED_MAP_FED_PRV" tableName="USER_FEDERATION_MAPPER">
+<!--        <createIndex indexName="IDX_USR_FED_MAP_FED_PRV" tableName="USER_FEDERATION_MAPPER">
             <column name="FEDERATION_PROVIDER_ID" type="VARCHAR(36)"/>
         </createIndex>
         <createIndex indexName="IDX_USR_FED_MAP_REALM" tableName="USER_FEDERATION_MAPPER">
             <column name="REALM_ID" type="VARCHAR(36)"/>
-        </createIndex>
-        <createIndex indexName="IDX_USR_FED_PRV_REALM" tableName="USER_FEDERATION_PROVIDER">
+        </createIndex>-->
+<!--        <createIndex indexName="IDX_USR_FED_PRV_REALM" tableName="USER_FEDERATION_PROVIDER">
             <column name="REALM_ID" type="VARCHAR(36)"/>
-        </createIndex>
+        </createIndex>-->
         <createIndex indexName="IDX_WEB_ORIG_CLIENT" tableName="WEB_ORIGINS">
             <column name="CLIENT_ID" type="VARCHAR(36)"/>
         </createIndex>

@@ -78,10 +78,6 @@
         </addColumn>
     </changeSet>
 
-    <changeSet author="keycloak" id="26.6.0-44424-set-realm-in-client-session">
-        <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate26_6_0_OfflineClientSessionRealm"/>
-    </changeSet>
-
     <changeSet author="keycloak" id="26.6.0-44424-idx-css-realm-and-clients">
         <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
             <not>
@@ -98,14 +94,14 @@
     </changeSet>
 
     <changeSet author="keycloak" id="26.6.0-add-last-modified-timestamp-user">
-        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+<!--        <preConditions onFail="MARK_RAN" onSqlOutput="TEST">
             <not>
                 <columnExists tableName="USER_ENTITY" columnName="LAST_MODIFIED_TIMESTAMP"/>
             </not>
         </preConditions>
         <addColumn tableName="USER_ENTITY">
             <column name="LAST_MODIFIED_TIMESTAMP" type="BIGINT"/>
-        </addColumn>
+        </addColumn>-->
     </changeSet>
 
     <changeSet author="keycloak" id="26.6.0-add-timestamps-group">
@@ -121,7 +117,7 @@
     </changeSet>
 
     <changeSet author="keycloak" id="26.6.0-43829-user-created-timestamp-index">
-        <preConditions onSqlOutput="TEST" onFail="MARK_RAN">
+<!--        <preConditions onSqlOutput="TEST" onFail="MARK_RAN">
             <not>
                 <indexExists tableName="USER_ENTITY" indexName="IDX_USER_CREATED_TIMESTAMP" />
             </not>
@@ -129,7 +125,7 @@
         <createIndex tableName="USER_ENTITY" indexName="IDX_USER_CREATED_TIMESTAMP">
             <column name="REALM_ID" type="VARCHAR(255)" />
             <column name="CREATED_TIMESTAMP" type="BIGINT" />
-        </createIndex>
+        </createIndex>-->
     </changeSet>
 
 </databaseChangeLog>

@@ -66,10 +66,10 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addColumn tableName="CREDENTIAL">
+        <!--addColumn tableName="CREDENTIAL">
             <column name="CREATED_DATE" type="BIGINT"/>
-        </addColumn>
-        <!--createTable tableName="USER_CONSENT">
+        </addColumn> 
+        <createTable tableName="USER_CONSENT">
             <column name="ID" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>

@@ -19,6 +19,7 @@ package org.keycloak.models.jpa.entities;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.stream.Stream;
 
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
@@ -30,8 +31,10 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import jakarta.persistence.Transient;
 
+import org.keycloak.credential.CredentialModel;
+import org.keycloak.models.RealmModel;
 import org.keycloak.models.utils.KeycloakModelUtils;
 
 import org.hibernate.annotations.BatchSize;
@@ -48,52 +51,46 @@ import org.hibernate.annotations.Nationalized;
         @NamedQuery(name="getRealmUserByEmail", query="select u from UserEntity u where u.email = :email and u.realmId = :realmId"),
         @NamedQuery(name="getRealmUserByLastName", query="select u from UserEntity u where u.lastName = :lastName and u.realmId = :realmId"),
         @NamedQuery(name="getRealmUserByFirstLastName", query="select u from UserEntity u where u.firstName = :first and u.lastName = :last and u.realmId = :realmId"),
-        @NamedQuery(name="getRealmUserByServiceAccount", query="select u from UserEntity u where u.serviceAccountClientLink = :clientInternalId and u.realmId = :realmId"),
         @NamedQuery(name="getRealmUsersByAttributeNameAndValue", query="select u from UserEntity u join u.attributes attr " +
                 "where u.realmId = :realmId and attr.name = :name and attr.value = :value"),
         @NamedQuery(name="getRealmUsersByAttributeNameAndLongValue", query="select u from UserEntity u join u.attributes attr " +
                 "where u.realmId = :realmId and attr.name = :name and attr.longValueHash = :longValueHash"),
-        @NamedQuery(name="deleteUsersByRealm", query="delete from UserEntity u where u.realmId = :realmId"),
-        @NamedQuery(name="deleteUsersByRealmAndLink", query="delete from UserEntity u where u.realmId = :realmId and u.federationLink=:link"),
-        @NamedQuery(name="unlinkUsers", query="update UserEntity u set u.federationLink = null where u.realmId = :realmId and u.federationLink=:link")
+        @NamedQuery(name="deleteUsersByRealm", query="delete from UserEntity u where u.realmId = :realmId")
 })
 @Entity
-@Table(name="USER_ENTITY", uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "REALM_ID", "USERNAME" }),
-        @UniqueConstraint(columnNames = { "REALM_ID", "EMAIL_CONSTRAINT" })
-})
+@Table(name="tblUser")
 public class UserEntity {
     @Id
-    @Column(name="ID", length = 36)
+    @Column(name="UserID")
     @Access(AccessType.PROPERTY) // we do this because relationships often fetch id, but not entity.  This avoids an extra SQL
     protected String id;
 
     @Nationalized
-    @Column(name = "USERNAME")
+    @Column(name = "UserName")
     protected String username;
     @Nationalized
-    @Column(name = "FIRST_NAME")
+    @Column(name = "FirstName")
     protected String firstName;
-    @Column(name = "CREATED_TIMESTAMP")
+    @Column(name = "DateAdded")
     protected Long createdTimestamp;
-    @Column(name = "LAST_MODIFIED_TIMESTAMP")
+    @Column(name = "DateUpdated")
     protected Long lastModifiedTimestamp;
     @Nationalized
-    @Column(name = "LAST_NAME")
+    @Column(name = "LastName")
     protected String lastName;
-    @Column(name = "EMAIL")
+    @Column(name = "EMail")
     protected String email;
-    @Column(name = "ENABLED")
+    @Column(name = "Active")
     protected boolean enabled;
-    @Column(name = "EMAIL_VERIFIED")
+    @Column(name = "Active")
     protected boolean emailVerified;
-
-    // This is necessary to be able to dynamically switch unique email constraints on and off in the realm settings
-    @Column(name = "EMAIL_CONSTRAINT")
-    protected String emailConstraint = KeycloakModelUtils.generateId();
-
-    @Column(name = "REALM_ID")
+    @Column(name = "RealmID")
     protected String realmId;
+    @Column(name = "Password")
+    protected String password;
+
+    @Transient
+    protected String emailConstraint;
 
     // Explicitly not using OrphanRemoval as we're handling the removal manually through HQL but at the same time we still
     // want to remove elements from the entity's collection in a manual way. Without this, Hibernate would do a duplicit
@@ -106,27 +103,9 @@ public class UserEntity {
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy="user")
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 20)
-    protected Collection<UserRequiredActionEntity> requiredActions = new LinkedList<>();
-
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy="user")
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 20)
-    protected Collection<CredentialEntity> credentials = new LinkedList<>();
-
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy="user")
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 20)
     protected Collection<FederatedIdentityEntity> federatedIdentities = new LinkedList<>();
 
-    @Column(name="FEDERATION_LINK")
-    protected String federationLink;
-
-    @Column(name="SERVICE_ACCOUNT_CLIENT_LINK")
-    protected String serviceAccountClientLink;
-
-    @Column(name="NOT_BEFORE")
-    protected int notBefore;
-
+    public int notBefore = 0;
     public String getId() {
         return id;
     }
@@ -219,34 +198,12 @@ public class UserEntity {
         this.attributes = attributes;
     }
 
-    public Collection<UserRequiredActionEntity> getRequiredActions() {
-        if (requiredActions == null) {
-            requiredActions = new LinkedList<>();
-        }
-        return requiredActions;
-    }
-
-    public void setRequiredActions(Collection<UserRequiredActionEntity> requiredActions) {
-        this.requiredActions = requiredActions;
-    }
-
     public String getRealmId() {
         return realmId;
     }
 
     public void setRealmId(String realmId) {
         this.realmId = realmId;
-    }
-
-    public Collection<CredentialEntity> getCredentials() {
-        if (credentials == null) {
-            credentials = new LinkedList<>();
-        }
-        return credentials;
-    }
-
-    public void setCredentials(Collection<CredentialEntity> credentials) {
-        this.credentials = credentials;
     }
 
     public Collection<FederatedIdentityEntity> getFederatedIdentities() {
@@ -260,28 +217,25 @@ public class UserEntity {
         this.federatedIdentities = federatedIdentities;
     }
 
-    public String getFederationLink() {
-        return federationLink;
-    }
-
-    public void setFederationLink(String federationLink) {
-        this.federationLink = federationLink;
-    }
-
-    public String getServiceAccountClientLink() {
-        return serviceAccountClientLink;
-    }
-
-    public void setServiceAccountClientLink(String serviceAccountClientLink) {
-        this.serviceAccountClientLink = serviceAccountClientLink;
-    }
-
     public int getNotBefore() {
         return notBefore;
     }
 
     public void setNotBefore(int notBefore) {
         this.notBefore = notBefore;
+    }
+
+    public Stream<CredentialModel> getStoredCredentialsStream() {
+        // For tblUser, we only have one credential: the password
+        if (this.password != null && !this.password.isEmpty()) {
+            CredentialModel credentialModel = new CredentialModel();
+            credentialModel.setId(KeycloakModelUtils.generateId()); // Generate a stable ID
+            credentialModel.setType("password");
+            credentialModel.setSecretData(this.password); // The hashed password from tblUser
+            credentialModel.setCreatedDate(this.createdTimestamp);
+            return Stream.of(credentialModel);
+        }
+        return Stream.empty();
     }
 
     @Override

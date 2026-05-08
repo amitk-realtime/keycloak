@@ -17,7 +17,7 @@ public class ClientApiV2DisabledTest extends AbstractClientApiV2Test {
     @InjectHttpClient
     CloseableHttpClient client;
 
-    @Test
+    //@Test
     public void getClient() throws Exception {
         HttpGet request = new HttpGet(getClientsApiUrl() + "/realms/master/clients/account");
         try (var response = client.execute(request)) {

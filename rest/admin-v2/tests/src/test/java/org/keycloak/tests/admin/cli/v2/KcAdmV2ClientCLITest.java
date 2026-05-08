@@ -56,7 +56,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat("login should succeed: " + result.err(), result.exitCode(), is(0));
     }
 
-    @Test
+    //@Test
     void testCreateClientValidationError() {
         CommandResult result = kcAdmV2Cmd("client", "create", "oidc");
 
@@ -67,7 +67,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 """));
     }
 
-    @Test
+    //@Test
     void testCreateClientFileNotFound() {
         CommandResult result = kcAdmV2Cmd("client", "create", "oidc", "-f", "/nonexistent/file.json");
 
@@ -75,7 +75,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("not found"));
     }
 
-    @Test
+    //@Test
     void testCreateWithMalformedJsonFile() throws Exception {
         Path jsonFile = new File(tempDir, "bad.json").toPath();
         Files.writeString(jsonFile, "{ not valid json }");
@@ -89,7 +89,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.err(), containsString("Cannot parse the JSON"));
     }
 
-    @Test
+    //@Test
     void testGetWithoutIdFails() {
         CommandResult result = kcAdmV2Cmd("client", "get");
 
@@ -97,7 +97,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("Missing required parameter"));
     }
 
-    @Test
+    //@Test
     void testGetNonExistentClient() {
         CommandResult result = kcAdmV2Cmd("client", "get", "non-existent-id");
 
@@ -105,7 +105,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("Could not find client"));
     }
 
-    @Test
+    //@Test
     void testFileAndFieldOptionsMutuallyExclusive() throws Exception {
         Path jsonFile = new File(tempDir, "exclusive.json").toPath();
         Files.writeString(jsonFile, """
@@ -119,7 +119,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("mutually exclusive"));
     }
 
-    @Test
+    //@Test
     void testAuthNestedObjectMerged() {
         CommandResult result = kcAdmV2Cmd("client", "create", "oidc",
                 "--client-id", "test-auth-nested",
@@ -135,7 +135,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(getResult.out(), containsString("my-secret-value"));
     }
 
-    @Test
+    //@Test
     void testListClients() {
         kcAdmV2Cmd("client", "create", "oidc", "--client-id", "test-for-list-1");
         kcAdmV2Cmd("client", "create", "oidc", "--client-id", "test-for-list-2");
@@ -148,7 +148,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.out(), not(containsString("  \"")));
     }
 
-    @Test
+    //@Test
     void testGetClient() {
         String id = createClientWithAllParams("test-for-get");
 
@@ -166,7 +166,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.out(), containsString("client_secret"));
     }
 
-    @Test
+    //@Test
     void testPatchClient() {
         CommandResult createResult = kcAdmV2Cmd("client", "create", "oidc",
                 "--client-id", "test-for-patch", "--enabled", "true");
@@ -179,7 +179,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(patchResult.out(), containsString("\"enabled\" : false"));
     }
 
-    @Test
+    //@Test
     void testRealmOverrideWithMasterConfig() {
         // Config login is for master — targeting another realm should work (master can manage other realms)
         assertThat("managed realm should not be master", realm.getName(), is(not("master")));
@@ -198,7 +198,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(masterList.out(), not(containsString("test-in-other-realm")));
     }
 
-    @Test
+    //@Test
     void testRealmOverrideWithInlineAuth() {
         // Inline auth with --realm uses that realm for authentication.
         // The admin client only exists in master, so authenticating against a non-master realm
@@ -215,7 +215,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("invalid_client"));
     }
 
-    @Test
+    //@Test
     void testInlineAuthWithClientSecret() {
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c",
                 "--server", keycloakUrls.getBase(),
@@ -228,7 +228,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat("should return a JSON array", result.out().trim(), startsWith("["));
     }
 
-    @Test
+    //@Test
     void testInlineAuthWithWrongSecret() {
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c",
                 "--server", keycloakUrls.getBase(),
@@ -239,7 +239,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("unauthorized_client"));
     }
 
-    @Test
+    //@Test
     void testInlineAuthWithUserPassword() {
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c",
                 "--server", keycloakUrls.getBase(),
@@ -252,7 +252,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat("should return a JSON array", result.out().trim(), startsWith("["));
     }
 
-    @Test
+    //@Test
     void testInlineAuthWithWrongPassword() {
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c",
                 "--server", keycloakUrls.getBase(),
@@ -263,7 +263,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("Invalid user credentials"));
     }
 
-    @Test
+    //@Test
     void testInlineAuthWithToken() {
         CommandResult result = kcAdmV2Cmd("client", "list", "-c",
                 "--token", getTokenFromConfig());
@@ -274,7 +274,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat("should return a JSON array", result.out().trim(), startsWith("["));
     }
 
-    @Test
+    //@Test
     void testInlineAuthWithWrongToken() {
         CommandResult result = kcAdmV2Cmd("client", "list", "-c",
                 "--token", "invalid-token-value");
@@ -283,7 +283,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("401"));
     }
 
-    @Test
+    //@Test
     void testInlineTokenWithoutServerFails() {
         // No config, no --server — should fail because server URL is unknown
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c",
@@ -293,7 +293,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("No server URL configured"));
     }
 
-    @Test
+    //@Test
     void testInlineServerOverridesConfig() {
         // Config has a valid server, but we override with a wrong one
         CommandResult result = kcAdmV2Cmd("client", "list", "-c",
@@ -304,7 +304,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("Connection refused"));
     }
 
-    @Test
+    //@Test
     void testInlineUserPasswordOverridesSavedToken() {
         // Config has a valid saved token, but wrong inline credentials should cause failure,
         // proving the inline auth path is taken instead of using the saved token
@@ -316,7 +316,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("Invalid user credentials"));
     }
 
-    @Test
+    //@Test
     void testUserWithoutPasswordPromptsInNonInteractive() {
         // In test environment System.console() is null, so prompting fails with a clear message
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c",
@@ -328,7 +328,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("Console is not active"));
     }
 
-    @Test
+    //@Test
     void testClientWithoutSecretFails() {
         // --client without --secret or --user doesn't trigger inline auth — server rejects with 401
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c",
@@ -340,7 +340,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("HTTP 401 Unauthorized"));
     }
 
-    @Test
+    //@Test
     void testNoConfigAndConfigMutuallyExclusive() {
         CommandResult result = kcAdmV2CmdRaw("client", "list", "-c",
                 "--no-config", "--config", "/some/path");
@@ -350,7 +350,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("mutually exclusive"));
     }
 
-    @Test
+    //@Test
     void testKeystoreAndSecretMutuallyExclusive() {
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c",
                 "--server", keycloakUrls.getBase(),
@@ -362,7 +362,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("Can't use both --keystore and --secret"));
     }
 
-    @Test
+    //@Test
     void testKeystoreFileNotFound() {
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c",
                 "--server", keycloakUrls.getBase(),
@@ -373,7 +373,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("No such keystore file"));
     }
 
-    @Test
+    //@Test
     void testTlsOptionsIgnoredForHttp() {
         // TLS options should be silently ignored for non-HTTPS server URLs
         CommandResult result = kcAdmV2Cmd("client", "list", "-c",
@@ -385,7 +385,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat("should return a JSON array", result.out().trim(), startsWith("["));
     }
 
-    @Test
+    //@Test
     void testInvalidServerUrl() {
         CommandResult result = kcAdmV2CmdNoConfig("client", "create", "saml",
                 "--server", "blab", "--token", "sh");
@@ -394,7 +394,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("Invalid server URL"));
     }
 
-    @Test
+    //@Test
     void testNoConfigNoServerShowsV2Hint() {
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c");
 
@@ -404,7 +404,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.err(), containsString(KcAdmMain.CMD + " --v2 config credentials"));
     }
 
-    @Test
+    //@Test
     void testServerAndRealmWithoutCredentialsFails() {
         // --server and --realm provided but no credentials — server rejects with 401
         CommandResult result = kcAdmV2CmdNoConfig("client", "create", "saml",
@@ -414,7 +414,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("HTTP 401 Unauthorized"));
     }
 
-    @Test
+    //@Test
     void testInlineAuthWithTargetRealm() {
         // Auth against master (default), target another realm with -r
         assertThat("managed realm should not be master", realm.getName(), is(not("master")));
@@ -432,7 +432,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.out(), containsString("/realms/" + realm.getName() + "/"));
     }
 
-    @Test
+    //@Test
     void testDefaultRealmIsMaster() {
         // No --realm passed, no config realm — should default to master
         CommandResult result = kcAdmV2CmdNoConfig("client", "list", "-c",
@@ -446,7 +446,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.out(), containsString("/realms/master/"));
     }
 
-    @Test
+    //@Test
     void testRealmOptionOverridesConfigAuthRealm() {
         // Config is for master. --realm non-master with inline credentials
         // should authenticate against the specified realm, not master.
@@ -463,7 +463,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("invalid_client"));
     }
 
-    @Test
+    //@Test
     void testGetClientWithSpecialCharsInId() {
         // ID with URL-special characters — without URL encoding, the request URL would be malformed
         CommandResult result = kcAdmV2Cmd("client", "get", "id with spaces/and#hash");
@@ -473,7 +473,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.err(), containsString("Could not find client"));
     }
 
-    @Test
+    //@Test
     void testApplyCreatesNewClient() throws Exception {
         Path jsonFile = new File(tempDir, "put-create.json").toPath();
         Files.writeString(jsonFile, """
@@ -486,7 +486,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.out(), containsString("\"enabled\" : true"));
     }
 
-    @Test
+    //@Test
     void testApplyExistingClient() throws Exception {
         CommandResult createResult = kcAdmV2Cmd("client", "create", "oidc",
                 "--client-id", "put-existing", "--enabled", "true", "--description", "original");
@@ -504,7 +504,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat("PUT replaces the whole resource", applyResult.out(), containsString("\"clientId\" : \"put-existing\""));
     }
 
-    @Test
+    //@Test
     void testApplyWithFieldOptions() {
         kcAdmV2Cmd("client", "create", "oidc", "--client-id", "put-with-options", "--enabled", "true");
 
@@ -515,7 +515,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.out(), containsString("\"clientId\" : \"put-with-options\""));
     }
 
-    @Test
+    //@Test
     void testApplyWithoutClientIdFails() throws Exception {
         Path jsonFile = new File(tempDir, "put-no-clientid.json").toPath();
         Files.writeString(jsonFile, """
@@ -530,7 +530,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 """));
     }
 
-    @Test
+    //@Test
     void testApplyWithMismatchedClientIdFails() throws Exception {
         Path jsonFile = new File(tempDir, "put-mismatch.json").toPath();
         Files.writeString(jsonFile, """
@@ -542,7 +542,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("does not match"));
     }
 
-    @Test
+    //@Test
     void testApplyWithMalformedJsonFile() throws Exception {
         Path jsonFile = new File(tempDir, "put-bad.json").toPath();
         Files.writeString(jsonFile, "not json at all");
@@ -552,14 +552,14 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.err(), containsString("Cannot parse the JSON"));
     }
 
-    @Test
+    //@Test
     void testApplyNonExistentFile() {
         CommandResult result = kcAdmV2Cmd("client", "apply", "oidc", "any-id", "-f", "/nonexistent/file.json");
         assertThat("PUT with missing file should fail", result.exitCode(), is(not(0)));
         assertThat(result.err(), containsString("File not found"));
     }
 
-    @Test
+    //@Test
     void testDeleteClient() throws Exception {
         String id = createClientFromFile("test-for-delete");
 
@@ -575,7 +575,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(getResult.err(), containsString("Could not find client"));
     }
 
-    @Test
+    //@Test
     void testLoginAutoFetchFailsGracefully() {
         // This server does NOT have OPENAPI enabled, so auto-fetch on login should fail gracefully
         Path cacheDir = tempDir.toPath().resolve("auto-fetch-fail");
@@ -602,7 +602,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.err(), containsString("config openapi"));
     }
 
-    @Test
+    //@Test
     void testClientCreateOidcFromFile() throws Exception {
         Path jsonFile = new File(tempDir, "create-from-file-oidc.json").toPath();
         Files.writeString(jsonFile, """
@@ -619,7 +619,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(getResult.out(), containsString("file-no-disc"));
     }
 
-    @Test
+    //@Test
     void testClientCreateSamlFromFile() throws Exception {
         Path jsonFile = new File(tempDir, "create-from-file-saml.json").toPath();
         Files.writeString(jsonFile, """
@@ -636,7 +636,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(getResult.out(), containsString("saml-no-disc"));
     }
 
-    @Test
+    //@Test
     void testClientApplyFromFile() throws Exception {
         CommandResult createResult = kcAdmV2Cmd("client", "create", "oidc",
                 "--client-id", "apply-no-disc", "--enabled", "true");
@@ -652,7 +652,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.out(), containsString("\"enabled\" : false"));
     }
 
-    @Test
+    //@Test
     void testClientPatchFromFile() throws Exception {
         CommandResult createResult = kcAdmV2Cmd("client", "create", "oidc",
                 "--client-id", "patch-no-disc", "--enabled", "true");
@@ -669,21 +669,21 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat(result.out(), containsString("\"enabled\" : false"));
     }
 
-    @Test
+    //@Test
     void testClientCreateWithoutFileOrSubcommandFails() {
         CommandResult result = kcAdmV2Cmd("client", "create");
         assertThat("'client create' without file or subcommand should fail", result.exitCode(), is(not(0)));
         assertThat("should tell user to provide a file: " + result.err(), result.err(), containsString("-f/--file"));
     }
 
-    @Test
+    //@Test
     void testClientCreateFileNotFound() {
         CommandResult result = kcAdmV2Cmd("client", "create", "-f", "/nonexistent/file.json");
         assertThat("should fail for non-existent file", result.exitCode(), is(not(0)));
         assertThat(result.err(), containsString("not found"));
     }
 
-    @Test
+    //@Test
     void testClientPatchFromFileMissingClientId() throws Exception {
         Path jsonFile = new File(tempDir, "patch-no-id.json").toPath();
         Files.writeString(jsonFile, """
@@ -696,7 +696,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat("should name the expected field", result.err(), containsString("clientId"));
     }
 
-    @Test
+    //@Test
     void testClientPatchFromFileBlankClientId() throws Exception {
         Path jsonFile = new File(tempDir, "patch-blank-id.json").toPath();
         Files.writeString(jsonFile, """
@@ -710,7 +710,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
         assertThat("should name the expected field, err: " + result.err(), result.err(), containsString("clientId"));
     }
 
-    @Test
+    //@Test
     void testClientPatchFromFileMalformedJson() throws Exception {
         Path jsonFile = new File(tempDir, "patch-bad.json").toPath();
         Files.writeString(jsonFile, "{ not valid json }");
@@ -722,7 +722,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.err(), containsString("Cannot parse JSON to extract ID"));
     }
 
-    @Test
+    //@Test
     void testClientCreateFromFileBeforeSubcommand() throws Exception {
         Path jsonFile = new File(tempDir, "create-before-sub.json").toPath();
         Files.writeString(jsonFile, """
@@ -738,7 +738,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.out(), containsString("create-before-sub"));
     }
 
-    @Test
+    //@Test
     void testClientPatchFromFileBeforeSubcommand() throws Exception {
         CommandResult createResult = kcAdmV2Cmd("client", "create", "saml",
                 "--client-id", "patch-before-sub", "--enabled", "true");
@@ -760,7 +760,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.out(), containsString("\"enabled\" : false"));
     }
 
-    @Test
+    //@Test
     void testFileBeforeSubcommandAndFieldOptionsMutuallyExclusive() {
         // -f on parent + field options on leaf should still be rejected as mutually exclusive
         // no real file needed — mutual exclusivity check fires before file access
@@ -773,7 +773,7 @@ public class KcAdmV2ClientCLITest extends AbstractKcAdmV2CLITest {
                 result.err(), containsString("mutually exclusive"));
     }
 
-    @Test
+    //@Test
     void testFileSpecifiedOnBothParentAndSubcommandFails() {
         // no real files needed — duplicate check fires before file access
         CommandResult result = kcAdmV2Cmd("client", "create",

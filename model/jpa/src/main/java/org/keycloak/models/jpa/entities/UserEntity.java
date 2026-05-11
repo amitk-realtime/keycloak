@@ -82,8 +82,6 @@ public class UserEntity {
     protected String email;
     @Column(name = "Active")
     protected boolean enabled;
-    @Column(name = "Active")
-    protected boolean emailVerified;
     @Column(name = "RealmID")
     protected String realmId;
     @Column(name = "Password")
@@ -180,11 +178,11 @@ public class UserEntity {
     }
 
     public boolean isEmailVerified() {
-        return emailVerified;
+        return this.enabled;
     }
 
     public void setEmailVerified(boolean emailVerified) {
-        this.emailVerified = emailVerified;
+
     }
 
     public Collection<UserAttributeEntity> getAttributes() {

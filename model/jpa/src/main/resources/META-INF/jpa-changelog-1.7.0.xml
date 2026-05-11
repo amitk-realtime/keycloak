@@ -51,7 +51,7 @@
             <column name="GROUP_ID" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="USER_ID" type="VARCHAR(36)">
+            <column name="USER_ID" type="INT(6)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -84,7 +84,7 @@
         <addForeignKeyConstraint baseColumnNames="GROUP_ID" baseTableName="GROUP_ATTRIBUTE" constraintName="FK_GROUP_ATTRIBUTE_GROUP" referencedColumnNames="ID" referencedTableName="KEYCLOAK_GROUP"/>
 
         <addPrimaryKey columnNames="GROUP_ID, USER_ID" constraintName="CONSTRAINT_USER_GROUP" tableName="USER_GROUP_MEMBERSHIP"/>
-        <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="USER_GROUP_MEMBERSHIP" constraintName="FK_USER_GROUP_USER" referencedColumnNames="ID" referencedTableName="USER_ENTITY"/>
+        <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="USER_GROUP_MEMBERSHIP" constraintName="FK_USER_GROUP_USER" referencedColumnNames="UserID" referencedTableName="tblUser"/>
 
         <addPrimaryKey columnNames="ROLE_ID, GROUP_ID" constraintName="CONSTRAINT_GROUP_ROLE" tableName="GROUP_ROLE_MAPPING"/>
         <addForeignKeyConstraint baseColumnNames="GROUP_ID" baseTableName="GROUP_ROLE_MAPPING" constraintName="FK_GROUP_ROLE_GROUP" referencedColumnNames="ID" referencedTableName="KEYCLOAK_GROUP"/>

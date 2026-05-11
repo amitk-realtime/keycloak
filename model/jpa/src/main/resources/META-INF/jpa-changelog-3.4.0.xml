@@ -25,8 +25,8 @@
         <addPrimaryKey columnNames="CLIENT_ID,IDENTITY_PROVIDER_ID" constraintName="CONSTR_CLIENT_IDEN_PROV_MAP" tableName="CLIENT_IDENTITY_PROV_MAPPING"/>
 
         <addPrimaryKey columnNames="ID" constraintName="CONSTRAINT_ADMIN_EVENT_ENTITY" tableName="ADMIN_EVENT_ENTITY"/>
-        <addPrimaryKey columnNames="ID" constraintName="CONSTRAINT_CREDENTIAL_ATTR" tableName="CREDENTIAL_ATTRIBUTE"/>
-        <addPrimaryKey columnNames="ID" constraintName="CONSTRAINT_FED_CREDENTIAL_ATTR" tableName="FED_CREDENTIAL_ATTRIBUTE"/>
+<!--        <addPrimaryKey columnNames="ID" constraintName="CONSTRAINT_CREDENTIAL_ATTR" tableName="CREDENTIAL_ATTRIBUTE"/>-->
+<!--        <addPrimaryKey columnNames="ID" constraintName="CONSTRAINT_FED_CREDENTIAL_ATTR" tableName="FED_CREDENTIAL_ATTRIBUTE"/>-->
 
         <dropForeignKeyConstraint baseTableName="CLIENT_DEFAULT_ROLES" constraintName="FK_NUILTS7KLWQW2H8M2B5JOYTKY" />
         <addPrimaryKey columnNames="CLIENT_ID,ROLE_ID" constraintName="CONSTR_CLIENT_DEFAULT_ROLES" tableName="CLIENT_DEFAULT_ROLES"/>

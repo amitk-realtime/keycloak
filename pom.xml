@@ -311,7 +311,7 @@
         <module>js</module>
         <module>test-framework</module>
         <module>tests</module>
-        <module>quarkus</module>
+        <module>quarkus</module> 
         <module>scim</module>
         <module>authzen</module>
     </modules>

@@ -108,6 +108,9 @@ public class JpaUserProvider implements UserProvider, UserCredentialStore, JpaUs
 
     @Override
     public UserModel addUser(RealmModel realm, String id, String username, boolean addDefaultRoles, boolean addDefaultRequiredActions) {
+        // DISABLED: User creation is disabled for tblUser integration. Users must be created through the existing product control path.
+        throw new UnsupportedOperationException("User creation through Keycloak is disabled. Users must be created through the existing product control path.");
+        /*
         if (id == null) {
             id = KeycloakModelUtils.generateId();
         }
@@ -141,11 +144,14 @@ public class JpaUserProvider implements UserProvider, UserCredentialStore, JpaUs
         }
 
         return userModel;
+        */
     }
 
     @Override
     public UserModel addUser(RealmModel realm, String username) {
-        return addUser(realm, KeycloakModelUtils.generateId(), username.toLowerCase(), true, true);
+        // DISABLED: User creation is disabled for tblUser integration.
+        throw new UnsupportedOperationException("User creation through Keycloak is disabled. Users must be created through the existing product control path.");
+        // return addUser(realm, KeycloakModelUtils.generateId(), username.toLowerCase(), true, true);
     }
 
     @Override
@@ -893,23 +899,25 @@ public class JpaUserProvider implements UserProvider, UserCredentialStore, JpaUs
 
     @Override
     public CredentialModel createCredential(RealmModel realm, UserModel user, CredentialModel cred) {
-        CredentialEntity entity = credentialStore.createCredentialEntity(realm, user, cred);
+        throw new UnsupportedOperationException("User creation through Keycloak is disabled. User credentials must be created through the existing product control path.");
+        /*CredentialEntity entity = credentialStore.createCredentialEntity(realm, user, cred);
 
         UserEntity userEntity = userInEntityManagerContext(user.getId());
         if (userEntity != null) {
             userEntity.getCredentials().add(entity);
         }
-        return toModel(entity);
+        return toModel(entity); */
     }
 
     @Override
     public boolean removeStoredCredential(RealmModel realm, UserModel user, String id) {
-        CredentialEntity entity = credentialStore.removeCredentialEntity(realm, user, id);
+        throw new UnsupportedOperationException("User creation through Keycloak is disabled. User credentials must be created through the existing product control path.");
+        /*CredentialEntity entity = credentialStore.removeCredentialEntity(realm, user, id);
         UserEntity userEntity = userInEntityManagerContext(user.getId());
         if (entity != null && userEntity != null) {
             userEntity.getCredentials().remove(entity);
         }
-        return entity != null;
+        return entity != null;*/
     }
 
     @Override
@@ -923,7 +931,11 @@ public class JpaUserProvider implements UserProvider, UserCredentialStore, JpaUs
 
     @Override
     public Stream<CredentialModel> getStoredCredentialsStream(RealmModel realm, UserModel user) {
-        return credentialStore.getStoredCredentialsStream(realm, user);
+        UserEntity userEntity = userInEntityManagerContext(user.getId());
+        if (userEntity == null) {
+            return null;
+        }
+        return userEntity.getStoredCredentialsStream();
     }
 
     @Override
@@ -931,9 +943,7 @@ public class JpaUserProvider implements UserProvider, UserCredentialStore, JpaUs
         UserEntity userEntity = userInEntityManagerContext(user.getId());
         if (userEntity != null) {
             // user already in persistence context, no need to execute a query
-            return userEntity.getCredentials().stream().filter(it -> type.equals(it.getType()))
-                    .sorted(Comparator.comparingInt(CredentialEntity::getPriority))
-                    .map(this::toModel);
+            return userEntity.getStoredCredentialsStream().filter(it -> type.equals(it.getType()));
         } else {
            return credentialStore.getStoredCredentialsByTypeStream(realm, user, type);
         }
@@ -941,12 +951,14 @@ public class JpaUserProvider implements UserProvider, UserCredentialStore, JpaUs
 
     @Override
     public CredentialModel getStoredCredentialByNameAndType(RealmModel realm, UserModel user, String name, String type) {
-        return credentialStore.getStoredCredentialByNameAndType(realm, user, name, type);
+        throw new UnsupportedOperationException("User creation through Keycloak is disabled. User credentials must be created through the existing product control path.");
+        //return credentialStore.getStoredCredentialByNameAndType(realm, user, name, type);
     }
 
     @Override
     public boolean moveCredentialTo(RealmModel realm, UserModel user, String id, String newPreviousCredentialId) {
-        return credentialStore.moveCredentialTo(realm, user, id, newPreviousCredentialId);
+        throw new UnsupportedOperationException("User creation through Keycloak is disabled. User credentials must be created through the existing product control path.");
+        //return credentialStore.moveCredentialTo(realm, user, id, newPreviousCredentialId);
     }
 
     @Override

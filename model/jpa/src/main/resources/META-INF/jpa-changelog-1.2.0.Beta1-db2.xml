@@ -148,7 +148,7 @@
         <addPrimaryKey columnNames="USER_SESSION, NAME" constraintName="CONSTRAINT_USN_PK" tableName="USER_SESSION_NOTE" />
         <addForeignKeyConstraint baseColumnNames="REALM_ID" baseTableName="IDENTITY_PROVIDER" constraintName="FK2B4EBC52AE5C3B34" referencedColumnNames="ID" referencedTableName="REALM" />
         <addForeignKeyConstraint baseColumnNames="CLIENT_ID" baseTableName="PROTOCOL_MAPPER" constraintName="FK_PCM_REALM" referencedColumnNames="ID" referencedTableName="CLIENT" />
-        <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="FEDERATED_IDENTITY" constraintName="FK404288B92EF007A6" referencedColumnNames="ID" referencedTableName="USER_ENTITY" />
+        <addForeignKeyConstraint baseColumnNames="USER_ID" baseTableName="FEDERATED_IDENTITY" constraintName="FK404288B92EF007A6" referencedColumnNames="UserID" referencedTableName="tblUser" />
         <addForeignKeyConstraint baseColumnNames="IDENTITY_PROVIDER_ID" baseTableName="IDENTITY_PROVIDER_CONFIG" constraintName="FKDC4897CF864C4E43" referencedColumnNames="INTERNAL_ID" referencedTableName="IDENTITY_PROVIDER" />
         <addForeignKeyConstraint baseColumnNames="PROTOCOL_MAPPER_ID" baseTableName="PROTOCOL_MAPPER_CONFIG" constraintName="FK_PMConfig" referencedColumnNames="ID" referencedTableName="PROTOCOL_MAPPER" />
         <addForeignKeyConstraint baseColumnNames="IDENTITY_PROVIDER_ID" baseTableName="CLIENT_IDENTITY_PROV_MAPPING" constraintName="FK_7CELWNIBJI49AVXSRTUF6XJ12" referencedColumnNames="INTERNAL_ID" referencedTableName="IDENTITY_PROVIDER" />
@@ -177,7 +177,7 @@
         <!--<addUniqueConstraint columnNames="APPLICATION_ID" constraintName="UK_M6QGA3RFME47335JY8JXYXH3I" tableName="REALM_APPLICATION" />
         <addForeignKeyConstraint baseColumnNames="APPLICATION_ID" baseTableName="REALM_APPLICATION" constraintName="FK_82S3P0DIUXAWWQQSA528UBY2Q" referencedColumnNames="ID" referencedTableName="CLIENT" />
         <addForeignKeyConstraint baseColumnNames="REALM_ID" baseTableName="REALM_APPLICATION" constraintName="FK_M6QGA3RFME47335JY8JXYXH3I" referencedColumnNames="ID" referencedTableName="REALM" />-->
-        <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate1_2_0_Beta1" />
+        <!-- <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate1_2_0_Beta1" /> -->
         <!-- Remove obsolete 'social' and 'claims' stuff -->
         <dropForeignKeyConstraint baseTableName="USER_SOCIAL_LINK" constraintName="FK_68CJYS5UWM55UY823Y75XG4OM" />
         <dropTable tableName="USER_SOCIAL_LINK" cascadeConstraints="true" />

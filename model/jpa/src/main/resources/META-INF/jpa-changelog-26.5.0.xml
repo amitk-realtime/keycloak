@@ -178,7 +178,7 @@
                 </not>
             </and>
         </preConditions>
-        <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate26_5_0_OrgTablesSetDefaultCharsetAndCollation"/>
+        <!-- <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate26_5_0_OrgTablesSetDefaultCharsetAndCollation"/> -->
     </changeSet>
 
     <changeSet author="keycloak" id="26.5.0-invitations-table-fixed2">

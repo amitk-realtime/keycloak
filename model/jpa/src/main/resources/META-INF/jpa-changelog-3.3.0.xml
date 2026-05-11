@@ -19,11 +19,11 @@
 
     <changeSet author="keycloak" id="3.3.0">
         <validCheckSum>7:94edff7cf9ce179e7e85f0cd78a3cf2c</validCheckSum>
-        <addColumn tableName="USER_ENTITY">
+<!--        <addColumn tableName="USER_ENTITY">
             <column name="NOT_BEFORE" type="INT" defaultValueNumeric="0">
                 <constraints nullable="false"/>
             </column>
-        </addColumn>
+        </addColumn>-->
     </changeSet>
 
 </databaseChangeLog>

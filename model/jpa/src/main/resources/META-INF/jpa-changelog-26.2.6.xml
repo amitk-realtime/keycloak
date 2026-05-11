@@ -18,7 +18,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="keycloak" id="26.2.6-39866-duplicate">
-        <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate26_2_6_RemoveDuplicateMigrationModelVersion"/>
+        <!-- <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate26_2_6_RemoveDuplicateMigrationModelVersion"/> -->
     </changeSet>
 
     <changeSet author="keycloak" id="26.2.6-39866-uk">
@@ -26,7 +26,7 @@
     </changeSet>
 
     <changeSet author="keycloak" id="26.2.6-40088-duplicate">
-        <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate26_2_6_RemoveDuplicateMigrationModelTime"/>
+        <!-- <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate26_2_6_RemoveDuplicateMigrationModelTime"/> -->
     </changeSet>
 
     <changeSet author="keycloak" id="26.2.6-40088-uk">

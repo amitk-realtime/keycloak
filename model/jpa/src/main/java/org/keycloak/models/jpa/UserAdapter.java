@@ -307,12 +307,14 @@ public class UserAdapter implements UserModel, JpaModel<UserEntity> {
 
     @Override
     public Stream<String> getRequiredActionsStream() {
-        return user.getRequiredActions().stream().map(action -> action.getAction()).distinct();
+        return null;
+        //return user.getRequiredActions().stream().map(action -> action.getAction()).distinct();
     }
 
     @Override
     public void addRequiredAction(String actionName) {
-        for (UserRequiredActionEntity attr : user.getRequiredActions()) {
+        return;
+        /*for (UserRequiredActionEntity attr : user.getRequiredActions()) {
             if (attr.getAction().equals(actionName)) {
                 return;
             }
@@ -321,19 +323,19 @@ public class UserAdapter implements UserModel, JpaModel<UserEntity> {
         attr.setAction(actionName);
         attr.setUser(user);
         em.persist(attr);
-        user.getRequiredActions().add(attr);
+        user.getRequiredActions().add(attr);*/
     }
 
     @Override
     public void removeRequiredAction(String actionName) {
-        Iterator<UserRequiredActionEntity> it = user.getRequiredActions().iterator();
+        /*Iterator<UserRequiredActionEntity> it = user.getRequiredActions().iterator();
         while (it.hasNext()) {
             UserRequiredActionEntity attr = it.next();
             if (attr.getAction().equals(actionName)) {
                 it.remove();
                 em.remove(attr);
             }
-        }
+        }*/
     }
 
     @Override
@@ -589,22 +591,24 @@ public class UserAdapter implements UserModel, JpaModel<UserEntity> {
 
     @Override
     public String getFederationLink() {
-        return user.getFederationLink();
+        return null;
+        //return user.getFederationLink();
     }
 
     @Override
     public void setFederationLink(String link) {
-        user.setFederationLink(link);
+        //user.setFederationLink(link);
     }
 
     @Override
     public String getServiceAccountClientLink() {
-        return user.getServiceAccountClientLink();
+        return null;
+        //return user.getServiceAccountClientLink();
     }
 
     @Override
     public void setServiceAccountClientLink(String clientInternalId) {
-        user.setServiceAccountClientLink(clientInternalId);
+        //user.setServiceAccountClientLink(clientInternalId);
     }
 
     @Override

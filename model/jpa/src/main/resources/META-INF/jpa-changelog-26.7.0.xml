@@ -36,7 +36,7 @@
     </changeSet>
 
     <changeSet author="keycloak" id="26.7.0-45292-realm-display-name-migrate-data">
-        <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate26_7_0_RealmDisplayName"/>
+        <!-- <customChange class="org.keycloak.connections.jpa.updater.liquibase.custom.JpaUpdate26_7_0_RealmDisplayName"/> -->
     </changeSet>
 
     <changeSet author="keycloak" id="26.7.0-45292-realm-display-name-remove-attribute">

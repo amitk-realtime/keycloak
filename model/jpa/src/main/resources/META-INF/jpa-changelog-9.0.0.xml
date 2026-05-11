@@ -40,11 +40,11 @@
 
     <changeSet author="keycloak" id="9.0.0-increase-column-size-federated-fk">
         <validCheckSum>7:20b37422abb9fb6571c618148f013a15</validCheckSum>
-        <modifyDataType newDataType="VARCHAR(255)" tableName="FED_USER_CONSENT" columnName="CLIENT_ID"/>
+<!--        <modifyDataType newDataType="VARCHAR(255)" tableName="FED_USER_CONSENT" columnName="CLIENT_ID"/>-->
         <modifyDataType newDataType="VARCHAR(255)" tableName="KEYCLOAK_ROLE" columnName="CLIENT_REALM_CONSTRAINT"/>
         <modifyDataType newDataType="VARCHAR(255)" tableName="RESOURCE_SERVER_POLICY" columnName="OWNER"/>
-        <modifyDataType newDataType="VARCHAR(255)" tableName="USER_CONSENT" columnName="CLIENT_ID"/>
-        <modifyDataType newDataType="VARCHAR(255)" tableName="USER_ENTITY" columnName="SERVICE_ACCOUNT_CLIENT_LINK"/>
+<!--        <modifyDataType newDataType="VARCHAR(255)" tableName="USER_CONSENT" columnName="CLIENT_ID"/>-->
+<!--        <modifyDataType newDataType="VARCHAR(255)" tableName="USER_ENTITY" columnName="SERVICE_ACCOUNT_CLIENT_LINK"/>-->
         <modifyDataType newDataType="VARCHAR(255)" tableName="OFFLINE_CLIENT_SESSION" columnName="CLIENT_ID"/>
         <modifyDataType newDataType="VARCHAR(255)" tableName="RESOURCE_SERVER_PERM_TICKET" columnName="OWNER"/>
         <modifyDataType newDataType="VARCHAR(255)" tableName="RESOURCE_SERVER_PERM_TICKET" columnName="REQUESTER"/>
